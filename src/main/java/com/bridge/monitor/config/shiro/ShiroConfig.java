@@ -12,8 +12,8 @@ import java.util.Map;
 /**
  * Created by pc on 2019/2/21 10:07
  **/
-//@Configuration
-/*public class ShiroConfig {
+@Configuration
+public class ShiroConfig {
 
     @Bean
     public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager){
@@ -22,14 +22,24 @@ import java.util.Map;
         Map<String,String>filterChainDefinitionMap=new HashMap<>();
         filterChainDefinitionMap.put("/login","anon");
         filterChainDefinitionMap.put("/logout","anon");
-        filterChainDefinitionMap.put("/recharge","anon");
-        filterChainDefinitionMap.put("/rechargeScore","anon");
-        filterChainDefinitionMap.put("/userLogin","anon");
         filterChainDefinitionMap.put("/js/*","anon");
         filterChainDefinitionMap.put("/img/*","anon");
+        filterChainDefinitionMap.put("/swagger-ui.html", "anon");
+        filterChainDefinitionMap.put("/swagger-resources", "anon");
+        filterChainDefinitionMap.put("/v2/api-docs", "anon");
+        filterChainDefinitionMap.put("/webjars/springfox-swagger-ui/**", "anon");
+        filterChainDefinitionMap.put("/configuration/security", "anon");
+        filterChainDefinitionMap.put("/configuration/ui", "anon");
+
+        filterChainDefinitionMap.put("/doc.html/**", "anon");
+        filterChainDefinitionMap.put("/swagger-resources/**", "anon");
+        filterChainDefinitionMap.put("/v2/api-docs/**", "anon");
+        filterChainDefinitionMap.put("/webjars/**", "anon");
+        filterChainDefinitionMap.put("/swagger-resources/configuration/ui/**", "anon");
+        filterChainDefinitionMap.put("/swagger-resources/configuration/security/**", "anon");
         filterChainDefinitionMap.put("/**","authc");
-        shiroFilterFactoryBean.setLoginUrl("/login");
-        shiroFilterFactoryBean.setSuccessUrl("/list");
+        shiroFilterFactoryBean.setLoginUrl("/toLogin");
+        /*shiroFilterFactoryBean.setSuccessUrl("/list");*/
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;
     }
@@ -45,4 +55,4 @@ import java.util.Map;
         webSecurityManager.setRealm(realm());
         return webSecurityManager;
     }
-}*/
+}

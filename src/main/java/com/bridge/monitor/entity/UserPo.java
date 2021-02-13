@@ -28,7 +28,7 @@ import java.util.Date;
 @AllArgsConstructor
 @Table(name = "bm_user")
 @TableName(value = "bm_user")
-public class User implements Serializable {
+public class UserPo implements Serializable {
 
     private static final long serialVersionUID = 6089480434564766971L;
 
