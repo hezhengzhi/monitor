@@ -12,8 +12,10 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -27,7 +29,7 @@ public class LoginController {
     private UserRepo userRepo;
     @GetMapping(value = "/login")
     @ApiOperation(value = "用户登录", notes = "用户登录")
-    public HttpResponse<UserPo> login(HttpServletRequest request,
+    public HttpResponse<UserPo> login(
                                       @RequestParam("name") String name,
                                       @RequestParam("password") String password) {
         if (StringUtils.isEmpty(name) || StringUtils.isEmpty(password)) {
