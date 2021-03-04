@@ -33,4 +33,6 @@ public class UserInVo {
     @ApiModelProperty(name = "updateTime", value = "更新时间")
     private Date updateTime;
 
+    @ApiModelProperty(name = "phone", value = "手机号")
+    private String phone;
 }

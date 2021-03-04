@@ -10,6 +10,6 @@ import com.bridge.monitor.entity.UserPo;
  * Date: 2021-02-13 18:16:33 
  */
 
-public interface UserRepo  extends JpaRepository<UserPo,String>,JpaSpecificationExecutor<UserPo> {
+public interface UserRepo  extends JpaRepository<UserPo, Integer>,JpaSpecificationExecutor<UserPo> {
     UserPo findByName(String username);
 }
