@@ -39,21 +39,19 @@ public class UserService {
         return HttpResponse.SUCCESS(userPos);
     }
 
-    class A implements Specification{
+    static class A implements Specification<UserPo>{
 
-        private String phone;
-
+        private final String phone;
         public A(String phone) {
             this.phone = phone;
         }
 
         @Override
-        public Predicate toPredicate(Root root, CriteriaQuery criteriaQuery, CriteriaBuilder criteriaBuilder) {
+        public Predicate toPredicate(Root<UserPo> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
             Predicate predicate = criteriaBuilder.conjunction();
-            if (!StringUtils.isEmpty(phone))
-                if (!StringUtils.isEmpty(phone)) {
-                    predicate.getExpressions().add(criteriaBuilder.like(root.get("phone"), "%" + phone + "%"));
-                }
+            if (!StringUtils.isEmpty(phone)) {
+                predicate.getExpressions().add(criteriaBuilder.like(root.get("phone"), "%" + phone + "%"));
+            }
             return predicate;
         }
     }
