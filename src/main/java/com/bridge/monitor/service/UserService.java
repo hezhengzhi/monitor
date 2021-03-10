@@ -28,7 +28,7 @@ public class UserService {
     public HttpResponse<Page<UserPo>> findUserList(String phone, int pageSize, int pageNum) {
         Sort sort = Sort.by(Sort.Direction.DESC, "createTime");
         PageRequest pageRequest = PageRequest.of(pageNum-1, pageSize, sort);
-        Page<UserPo>userPos=userRepo.findAll(getWhereClause(phone),pageRequest);
+        Page<UserPo>userPos=userRepo.findAll(new A(phone),pageRequest);
         /*Page<UserPo> userPos = userRepo.findAll((Specification<UserPo>) (root, criteriaQuery, criteriaBuilder) -> {
             Predicate predicate = criteriaBuilder.conjunction();
             if (!StringUtils.isEmpty(phone)) {
@@ -39,6 +39,24 @@ public class UserService {
         return HttpResponse.SUCCESS(userPos);
     }
 
+    class A implements Specification{
+
+        private String phone;
+
+        public A(String phone) {
+            this.phone = phone;
+        }
+
+        @Override
+        public Predicate toPredicate(Root root, CriteriaQuery criteriaQuery, CriteriaBuilder criteriaBuilder) {
+            Predicate predicate = criteriaBuilder.conjunction();
+            if (!StringUtils.isEmpty(phone))
+                if (!StringUtils.isEmpty(phone)) {
+                    predicate.getExpressions().add(criteriaBuilder.like(root.get("phone"), "%" + phone + "%"));
+                }
+            return predicate;
+        }
+    }
     private static Specification<UserPo> getWhereClause(final String phone)
     {
         return new Specification<UserPo>()
