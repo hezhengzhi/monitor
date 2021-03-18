@@ -28,14 +28,13 @@ public class UserService {
     public HttpResponse<Page<UserPo>> findUserList(String phone, int pageSize, int pageNum) {
         Sort sort = Sort.by(Sort.Direction.DESC, "createTime");
         PageRequest pageRequest = PageRequest.of(pageNum-1, pageSize, sort);
-        Page<UserPo>userPos=userRepo.findAll(new A(phone),pageRequest);
-        /*Page<UserPo> userPos = userRepo.findAll((Specification<UserPo>) (root, criteriaQuery, criteriaBuilder) -> {
+        Page<UserPo> userPos = userRepo.findAll((Specification<UserPo>) (root, criteriaQuery, criteriaBuilder) -> {
             Predicate predicate = criteriaBuilder.conjunction();
             if (!StringUtils.isEmpty(phone)) {
                 predicate.getExpressions().add(criteriaBuilder.like(root.get("phone"), "%" + phone + "%"));
             }
             return predicate;
-        }, pageRequest);*/
+        }, pageRequest);
         return HttpResponse.SUCCESS(userPos);
     }
 
@@ -54,22 +53,6 @@ public class UserService {
             }
             return predicate;
         }
-    }
-    private static Specification<UserPo> getWhereClause(final String phone)
-    {
-        return new Specification<UserPo>()
-        {
-            @Override
-            public Predicate toPredicate(Root<UserPo> root, CriteriaQuery<?> query, CriteriaBuilder cb)
-            {
-                Predicate predicate = cb.conjunction();
-                if (!StringUtils.isEmpty(phone))
-                    if (!StringUtils.isEmpty(phone)) {
-                        predicate.getExpressions().add(cb.like(root.get("phone"), "%" + phone + "%"));
-                    }
-                return predicate;
-            }
-        };
     }
 
     public HttpResponse<UserPo> saveUser(UserInVo userInVo) {
