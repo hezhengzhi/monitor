@@ -1,5 +1,6 @@
 package com.bridge.monitor.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.Builder;
 import lombok.ToString;
@@ -69,6 +70,7 @@ public class OperateRecordPo  implements Serializable {
 	/**
 	 * 操作时间
 	 */
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@Column(name = "create_time" )
 	private Date createTime;
 

@@ -17,4 +17,6 @@ public interface OperateRecordRepo  extends JpaRepository<OperateRecordPo,Intege
     void deleteByIdIn(List<?> idList);
 
     List<OperateRecordPo> findByUserNameLikeAndIsDelete(String s, int i);
+
+    List<OperateRecordPo> findByIsDelete(int i);
 }

@@ -30,6 +30,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -79,21 +80,27 @@ public class OperateRecordService {
     }
 
     public void export(String userName, HttpServletResponse response) {
-        try {
-            SimpleDateFormat scoff = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            String excelName = String.format("operateRecord-%s.xlsx", scoff.format(new Date()));
+        try(OutputStream outputStream=response.getOutputStream()) {
+            String excelName = "operateRecord.xlsx";
             response.setHeader("Content-disposition", "attachment; filename=" + excelName);
-            List<OperateRecordPo>operateRecordPos=operateRecordRepo.findByUserNameLikeAndIsDelete("%"+userName+"%",0);
+            List<OperateRecordPo>operateRecordPos=new ArrayList<>();
+            if (StringUtils.isEmpty(userName)){
+                operateRecordPos=operateRecordRepo.findByIsDelete(0);
+            }else {
+                operateRecordPos=operateRecordRepo.findByUserNameLikeAndIsDelete("%"+userName+"%",0);
+            }
             List<OperateRecordExportBo>operateRecordExportBos=operateRecordPos.stream().map(operateRecordPo -> {
                 OperateRecordExportBo operateRecordExportBo=new OperateRecordExportBo();
                 BeanUtils.copyProperties(operateRecordPo,operateRecordExportBo);
                 return operateRecordExportBo;
             }).collect(Collectors.toList());
+
             response.setHeader("Content-disposition", "attachment; filename=" + excelName);
-            EasyExcel.write(response.getOutputStream(), OperateRecordExportBo.class)
+            EasyExcel.write(outputStream, OperateRecordExportBo.class)
                     .registerWriteHandler(CellStyleUtil.getHorizontalCellStyleStrategy())
                     .registerWriteHandler(new CustomRowWriteHandler()).sheet("操作记录导出")
-                    .doWrite(operateRecordExportBos);
+                   .doWrite(operateRecordExportBos);
+            outputStream.flush();
         }catch (Exception e){
             log.error("操作记录导出失败  "+e.getMessage(),e.getMessage());
         }

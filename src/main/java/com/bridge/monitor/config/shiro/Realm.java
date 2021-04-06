@@ -31,7 +31,7 @@ public class Realm extends AuthorizingRealm {
         UserPo user = userRepo.findByName(username);
         String password = user.getPassword();
         SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(
-                username, password, getName()
+                user, password, getName()
         );
         return info;
     }

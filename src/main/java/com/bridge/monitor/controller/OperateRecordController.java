@@ -13,6 +13,7 @@ import org.apache.shiro.subject.Subject;
 import org.apache.shiro.util.CollectionUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -68,7 +69,7 @@ public class OperateRecordController {
     }
 
     @PostMapping(value = "/export")
-    @ApiOperation(value = "导出操作记录", notes = "导出操作记录")
+    @ApiOperation(value = "导出操作记录", notes = "导出操作记录" ,produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
     @ApiImplicitParam(value = "操作人姓名", name = "userName",paramType = "query")
     public void export(HttpServletResponse response, String userName) {
         operateRecordService.export(userName, response);

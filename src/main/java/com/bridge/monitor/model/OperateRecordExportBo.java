@@ -30,6 +30,6 @@ public class OperateRecordExportBo {
 
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@ExcelProperty(value = "操作时间",index = 4)
-	private String createTime;
+	private Date createTime;
 
 }
