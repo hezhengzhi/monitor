@@ -59,8 +59,8 @@ public class BridgeService {
 
     public HttpResponse<String> save(BridgeInVo bridgeInVo) {
         BridgePo bridgePo =new BridgePo();
-        BeanUtils.copyProperties(bridgeInVo,bridgeInVo);
-        UserPo userPo=(UserPo) SecurityUtils.getSubject();
+        BeanUtils.copyProperties(bridgeInVo,bridgePo);
+        UserPo userPo=(UserPo) SecurityUtils.getSubject().getPrincipal();
         if (bridgePo.getId()==null){
             bridgePo.setCreateTime(new Date());
             bridgePo.setCreateUserId(userPo.getId());

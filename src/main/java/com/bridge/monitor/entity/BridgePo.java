@@ -17,7 +17,7 @@ import java.util.Date;
 /**
  * Description: 桥梁信息表 
  * Author: hezhengzhi
- * Date: 2021-04-17 20:37:11 
+ * Date: 2021-04-17 22:58:28 
  */
 
 @Data
@@ -32,7 +32,7 @@ import java.util.Date;
 @TableName (value ="bm_bridge")
 public class BridgePo  implements Serializable {
 
-	private static final long serialVersionUID =  6574316552617015371L;
+	private static final long serialVersionUID =  7519096460933011924L;
 
 	/**
 	 * 主键
@@ -95,5 +95,23 @@ public class BridgePo  implements Serializable {
 
 	@Column(name = "update_user_id" )
 	private Integer updateUserId;
+
+	/**
+	 * 省id
+	 */
+	@Column(name = "province_id" )
+	private Integer provinceId;
+
+	/**
+	 * 市id
+	 */
+	@Column(name = "city_id" )
+	private Integer cityId;
+
+	/**
+	 * 区id
+	 */
+	@Column(name = "area_id" )
+	private Integer areaId;
 
 }

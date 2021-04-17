@@ -7,7 +7,7 @@ import java.util.Date;
 /**
  * Description: 桥梁信息表 
  * Author: hezhengzhi
- * Date: 2021-04-17 20:37:32 
+ * Date: 2021-04-17 22:58:40 
  */
 
 @Data
@@ -46,5 +46,14 @@ public class BridgeInVo {
 
 	@ApiModelProperty(name = "updateUserId",value = "null")
 	private Integer updateUserId;
+
+	@ApiModelProperty(name = "provinceId",value = "省id")
+	private Integer provinceId;
+
+	@ApiModelProperty(name = "cityId",value = "市id")
+	private Integer cityId;
+
+	@ApiModelProperty(name = "areaId",value = "区id")
+	private Integer areaId;
 
 }
